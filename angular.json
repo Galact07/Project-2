@@ -50,7 +50,10 @@
                   "maximumError": "4kB"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "sourceMap": false,
+              "optimization": true,
+              "extractLicenses": true
             },
             "development": {
               "optimization": false,
@@ -97,5 +100,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "2b74fa13-cebe-4e47-a30a-0747782a6b21"
   }
 }
