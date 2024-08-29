@@ -1,27 +1,126 @@
-# InsurancePoliciesApp
+# Insurance Policies CRUD API
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.1.
+## Overview
 
-## Development server
+The Insurance Policies CRUD API is a .NET Core Web API that allows you to manage insurance policies in a database. This application provides endpoints for creating, reading, updating, and deleting insurance policies.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Project Structure
 
-## Code scaffolding
+- **Controllers**: Contains API controllers to handle HTTP requests.
+- **Data**: Contains the repository class for database operations.
+- **Models**: Contains the data model representing an insurance policy.
+- **ClientApp**: Contains the frontend application built with React.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Database Schema
 
-## Build
+**InsurancePolicies Table**
+- `Id` (int, primary key, auto-increment)
+- `PolicyNumber` (nvarchar)
+- `PolicyHolderName` (nvarchar)
+- `StartDate` (datetime)
+- `EndDate` (datetime)
+- `Type` (nvarchar)
+- `PremiumAmount` (decimal)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## API Routes
 
-## Running unit tests
+- **GET** `/api/insurancepolicies`
+  - Retrieves a list of all insurance policies.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- **GET** `/api/insurancepolicies/{id}`
+  - Retrieves a specific insurance policy by ID.
 
-## Running end-to-end tests
+- **POST** `/api/insurancepolicies`
+  - Creates a new insurance policy. Requires a JSON payload with policy details.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+- **PUT** `/api/insurancepolicies/{id}`
+  - Updates an existing insurance policy by ID. Requires a JSON payload with updated policy details.
 
-## Further help
+- **DELETE** `/api/insurancepolicies/{id}`
+  - Deletes an insurance policy by ID.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Setup and Running
+
+### Prerequisites
+
+- .NET SDK (6.0 or later)
+- SQL Server
+- Node.js (for frontend)
+
+### Configuration
+
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/yourusername/InsurancePoliciesCRUDApp.git
+   cd InsurancePoliciesCRUDApp
+   ```
+
+2. **Update Connection String**
+   Edit `appsettings.json` and provide your SQL Server connection string:
+   ```json
+   "ConnectionStrings": {
+       "DefaultConnection": "Server=your_server;Database=InsurancePoliciesDb;Trusted_Connection=True;"
+   }
+   ```
+
+3. **Run Migrations**
+   ```bash
+   dotnet ef database update
+   ```
+
+4. **Run the Application**
+   ```bash
+   dotnet run
+   ```
+
+   The API will be accessible at `http://localhost:5047`.
+
+### Frontend Setup
+
+1. **Navigate to ClientApp Directory**
+   ```bash
+   cd ClientApp
+   ```
+
+2. **Install Dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Run the Frontend Application**
+   ```bash
+   npm start
+   ```
+
+   The frontend application will be accessible at `http://localhost:3000`.
+
+## Database Setup
+
+Ensure that the database schema is set up by running the following SQL script to create the InsurancePolicies table:
+
+```sql
+CREATE TABLE InsurancePolicies (
+    Id INT PRIMARY KEY IDENTITY,
+    PolicyNumber NVARCHAR(50),
+    PolicyHolderName NVARCHAR(100),
+    StartDate DATETIME,
+    EndDate DATETIME,
+    Type NVARCHAR(50),
+    PremiumAmount DECIMAL(18, 2)
+);
+```
+
+## Testing the API
+
+Use tools like Postman or curl to test the API endpoints. Example curl command to get all policies:
+
+```bash
+curl -X GET https://localhost:5057/api/insurancepolicies
+```
+
+## Contributors
+
+- Kushal Singh
+- Mukul Sharma
+- Sidharth Nair
+- Roshankumar Pokal
