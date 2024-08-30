@@ -45,11 +45,20 @@ export class InsurancePolicyComponent implements OnInit{
 
   addPolicy() {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    this.http.post(this.APIUrl + 'insurancepolicies', JSON.stringify(this.newPolicy), { headers }).subscribe(() => {
-      this.getPolicy(); // Refresh the policy list
-      this.resetForm(); // Reset the form
-    });
+  
+    this.http.post(this.APIUrl + 'insurancepolicies', this.newPolicy, { headers })
+      .subscribe({
+        next: () => {
+          this.getPolicy(); // Refresh the policy list
+          this.resetForm(); // Reset the form
+        },
+        error: (error) => {
+          console.error('Error adding policy:', error);
+          // Optionally, you can display an error message to the user
+        }
+      });
   }
+  
 
   resetForm() {
     this.newPolicy = {};
