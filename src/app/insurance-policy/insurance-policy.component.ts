@@ -63,12 +63,21 @@ export class InsurancePolicyComponent implements OnInit{
   resetForm() {
     this.newPolicy = {};
   }
-
-  openUpdateModal(policy: any): void {
-    const modalRef = this.modalService.open(UpdatePolicyModalComponent);
+  openUpdateModal(policy: any) {
+    const modalRef = this.modalService.open(UpdatePolicyModalComponent, { size: 'lg' });
     modalRef.componentInstance.policy = policy;
-    modalRef.result.then(() => {
-      this.getPolicy();
-    }, () => {});
+
+    modalRef.result.then(
+      () => this.getPolicy(), // Refresh the policy list after update
+      () => {} // Handle dismissals if needed
+    );
   }
+
+  // openUpdateModal(policy: any): void {
+  //   const modalRef = this.modalService.open(UpdatePolicyModalComponent);
+  //   modalRef.componentInstance.policy = policy;
+  //   modalRef.result.then(() => {
+  //     this.getPolicy();
+  //   }, () => {});
+  // }
 }

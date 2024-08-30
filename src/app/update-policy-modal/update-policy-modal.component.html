@@ -1,22 +1,18 @@
 <div class="modal-header">
   <h5 class="modal-title">Update Policy</h5>
-  <button type="button" class="close" (click)="closeModal()">
-    <span>&times;</span>
+  <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+    <span aria-hidden="true">&times;</span>
   </button>
 </div>
 <div class="modal-body">
-  <form (ngSubmit)="updatePolicy()">
+  <form (ngSubmit)="updatePolicy()" #policyForm="ngForm">
+    <!-- Import the FormsModule -->
     <div class="form-group">
-      <label for="policyNumber">Policy Number</label>
-      <input type="text" class="form-control" id="policyNumber"
-     name="policyNumber" required>
-
+      <label for="policyNumber">Policy Number:</label>
+      <input type="text" id="policyNumber" [(ngModel)]="policy.policyNumber" name="policyNumber" class="form-control" required>
     </div>
-    <div class="form-group">
-      <label for="policyHolderName">Policy Holder Name</label>
-      <input type="text" class="form-control" id="policyHolderName" name="policyHolderName" required>
-    </div>
-    <!-- Add other fields as necessary -->
-    <button type="submit" class="btn btn-primary">Save changes</button>
+    <!-- Add other fields similarly... -->
+    <button type="submit" class="btn btn-primary">Update Policy</button>
   </form>
 </div>
+
